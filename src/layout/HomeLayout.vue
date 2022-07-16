@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import AsideMenu from '@/components/AsideMenu.vue';
+import AsideMenu from '@/components/AsideMenu.vue'
 
 </script>
 

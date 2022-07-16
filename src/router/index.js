@@ -5,7 +5,7 @@ import BlankLayout from '@/layout/BlankLayout.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/base',
     redirect: '/login',
     component: BaseLayout,
     children: [
@@ -16,53 +16,53 @@ const routes = [
     ]
   },
   {
-    path: '',
+    path: '/',
     name: 'HomeLayout',
+    redirect: '/home',
     component: HomeLayout,
     children: [
       {
         path: '/home',
         name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/Home.vue')
+      }
+    ]
+  }
+]
+
+export const asynRoutes = [
+  {
+    path: '/setting',
+    component: BlankLayout,
+    redirect: '/setting/user',
+    meta: {
+      title: '系统设置',
+      icon: 'Setting'
+    },
+    children: [
+      {
+        path: '/setting/user',
+        component: () => import('@/views/setting/User.vue'),
         meta: {
-          title: '首页',
-          icon: 'HomeFilled'
+          title: '用户管理',
+          icon: 'Avatar'
         }
       },
       {
-        path: '/setting',
-        component: BlankLayout,
-        redirect: '/setting/user',
+        path: '/setting/role',
+        component: () => import('@/views/setting/Role.vue'),
         meta: {
-          title: '系统设置',
-          icon: 'Setting'
-        },
-        children: [
-          {
-            path: '/setting/user',
-            component: () => import('@/views/setting/user.vue'),
-            meta: {
-              title: '用户管理',
-              icon: 'Avatar'
-            }
-          },
-          {
-            path: '/setting/role',
-            component: () => import('@/views/setting/Role.vue'),
-            meta: {
-              title: '角色管理',
-              icon: 'Burger'
-            }
-          },
-          {
-            path: '/setting/permission',
-            component: () => import('@/views/setting/Permission.vue'),
-            meta: {
-              title: '权限管理',
-              icon: 'ScaleToOriginal'
-            }
-          }
-        ]
+          title: '角色管理',
+          icon: 'Burger'
+        }
+      },
+      {
+        path: '/setting/permission',
+        component: () => import('@/views/setting/Permission.vue'),
+        meta: {
+          title: '权限管理',
+          icon: 'ScaleToOriginal'
+        }
       }
     ]
   }
@@ -73,5 +73,8 @@ const router = createRouter({
   routes
 })
 
-export default router
+asynRoutes.forEach(item => {
+  router.addRoute('HomeLayout', item)
+})
 
+export default router
