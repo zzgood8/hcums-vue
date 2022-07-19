@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar>
+  <el-scrollbar view-style="height: 100%;">
     <el-card shadow="never" style="height: 99%;">
       <div class="row-class">
         <UserCard v-for="item in users" :key="item.username" :user="item" style="margin: 10px" />
@@ -16,7 +16,9 @@ import { ref } from 'vue';
 const users = ref([])
 
 api.getUser().then(res => {
-  users.value = res.data.data
+  if (res.code == 200) {
+    users.value = res.data
+  }
 }).catch(err => {
   console.log(err)
 })

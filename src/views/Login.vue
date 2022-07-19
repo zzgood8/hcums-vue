@@ -8,11 +8,12 @@
       </el-form-item>
 
       <el-form-item label="密码" prop="password" inline-message>
-        <el-input v-model="loginData.password" type="password" autocomplete="off" />
+        <el-input v-model="loginData.password" type="password" autocomplete="off" @keyup.enter="submitForm()" />
       </el-form-item>
 
       <el-form-item>
-        <el-button :loading="loginState" size="large" style="width: 100%;margin-top: 10px;" type="primary" @click="submitForm()">{{ loginState ? '登录中' : '登录'}}
+        <el-button :loading="loginState" size="large" style="width: 100%;margin-top: 10px;" type="primary"
+          @click="submitForm()">{{ loginState ? '登录中' : '登录' }}
         </el-button>
       </el-form-item>
 
@@ -21,7 +22,7 @@
 </template>
 
 <script setup>
-import router from '@/router';
+import router from '@/router'
 import { reactive, ref } from 'vue'
 import * as api from '@/api/login.js'
 
@@ -50,8 +51,11 @@ const submitForm = () => {
     if (isValid) {
       loginState.value = true
       api.login(loginData).then(res => {
-        console.log(res)
-        router.replace('/home')
+        if (res.code == 200) {
+          router.replace('/home')
+        } else {
+          loginData.password = ''
+        }
       }).catch(err => {
         console.log(err)
       }).finally(() => {

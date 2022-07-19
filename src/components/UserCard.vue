@@ -32,7 +32,7 @@
           <Timer />
         </el-icon>
 
-        {{ user.createTime.substring(0,10) }}
+        {{ user.createTime.substring(0, 10) }}
       </span>
     </el-row>
 
@@ -42,16 +42,13 @@
 
 <script setup>
 import { defineProps } from "vue"
-const pro = defineProps(['user'])
-
-console.log(pro)
+defineProps(['user'])
 
 </script>
 
 <style>
 .user-card {
   width: 200px;
-  /* border: 1px solid red; */
   position: relative;
 }
 
@@ -69,10 +66,9 @@ console.log(pro)
 }
 
 .user-card-center {
-  /* display: flex; */
-  /* justify-content: space-between; */
   margin-bottom: 15px;
 }
+
 .user-card-row-space {
   margin-top: 5px;
 }
