@@ -2,7 +2,7 @@
   <el-card class="user-card">
 
     <el-row class="user-card-avatar">
-      <el-avatar :size="80" src="http://dummyimage.com/250x250" />
+      <el-avatar :size="80" :src="user.avatar" />
     </el-row>
 
     <el-row class="user-card-avatar user-card-row-space">
